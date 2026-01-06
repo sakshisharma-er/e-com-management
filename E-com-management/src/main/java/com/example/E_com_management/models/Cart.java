@@ -1,4 +1,5 @@
 package com.example.E_com_management.models;
+
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,5 +16,5 @@ public class Cart {
     private String userID;
     private List<CartItem> items;
     private double totalAmount;
-    
+
 }

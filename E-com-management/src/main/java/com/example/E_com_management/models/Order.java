@@ -1,4 +1,5 @@
 package com.example.E_com_management.models;
+
 import com.example.E_com_management.enums.OrderStatus;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -21,6 +22,4 @@ public class Order {
     private OrderStatus status;
     private LocalDateTime orderDate;
 
-
-    
 }

@@ -1,6 +1,6 @@
 package com.example.E_com_management.models;
-import lombok.*;
 
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -11,5 +11,5 @@ public class OrderItem {
     private String productName;
     private int quatity;
     private double price;
-    
+
 }

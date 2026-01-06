@@ -1,4 +1,5 @@
 package com.example.E_com_management.models;
+
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "product")
 public class Product {
-    
+
     @Id
     private String id;
     private String name;

@@ -12,25 +12,25 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class CartService {
-    private final CartRepository cartRepository;
-    private final ProductRepository productRepository;
+        private final CartRepository cartRepository;
+        private final ProductRepository productRepository;
 
-    public Cart addtoCart(String userId, String productId, int quanity) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+        public Cart addtoCart(String userId, String productId, int quanity) {
+                Product product = productRepository.findById(productId)
+                                .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        Cart cart = cartRepository.findByUserID(userId)
-                .orElseGet(() -> Cart.builder()
-                        .userID(userId)
-                        .items(new ArrayList<>())
-                        .totalAmount(0)
-                        .build());
-        CartItem item = new CartItem(productId, quanity, product.getPrice());
-        cart.getItems().add(item);
-        cart.setTotalAmount(
-                cart.getItems().stream()
-                        .mapToDouble(i -> i.getPrice() * i.getQuantity())
-                        .sum());
-        return cartRepository.save(cart);
-    }
+                Cart cart = cartRepository.findByUserID(userId)
+                                .orElseGet(() -> Cart.builder()
+                                                .userID(userId)
+                                                .items(new ArrayList<>())
+                                                .totalAmount(0)
+                                                .build());
+                CartItem item = new CartItem(productId, quanity, product.getPrice());
+                cart.getItems().add(item);
+                cart.setTotalAmount(
+                                cart.getItems().stream()
+                                                .mapToDouble(i -> i.getPrice() * i.getQuantity())
+                                                .sum());
+                return cartRepository.save(cart);
+        }
 }
