@@ -6,10 +6,10 @@ import com.example.E_com_management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import com.example.E_com_management.security.JwtUtil;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.example.E_com_management.dto.RegisterRequest;
+import com.example.E_com_management.enums.Role;
 
 @Service
 @RequiredArgsConstructor
@@ -35,4 +35,24 @@ public class AuthService {
         String email = jwtUtil.extractEmail(refreshToken);
         return new AuthResponse(jwtUtil.generateAccessToken(email), refreshToken);
     }
+
+    public String register(RegisterRequest request) {
+
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        // Convert string from request to enum
+        Role role;
+        try {
+            role = Role.valueOf(request.getRole().toUpperCase());
+        } catch (Exception e) {
+            role = Role.CUSTOMER; // default if invalid
+        }
+        user.setRole(role);
+
+        userRepository.save(user);
+        return "User Registered";
+    }
+
 }
